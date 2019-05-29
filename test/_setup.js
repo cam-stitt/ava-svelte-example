@@ -4,7 +4,7 @@ require('browser-env')();
 const hooks = require('require-extension-hooks');
 const svelte = require('svelte/compiler');
 
-// Setup vue files to be processed by `require-extension-hooks-vue`
+// Setup svelte files to be processed by `require-extension-hooks`
 hooks('svelte').push(({content, filename}) => {
   const result = svelte.compile(content, {
     filename,
@@ -17,5 +17,5 @@ hooks('svelte').push(({content, filename}) => {
     sourceMap: result.js.map,
   };
 });
-// Setup vue and js files to be processed by `require-extension-hooks-babel`
+// Setup svelte and js files to be processed by `require-extension-hooks-babel`
 hooks(['svelte', 'js']).exclude(({filename}) => filename.match(/\/node_modules\//)).plugin('babel').push();
